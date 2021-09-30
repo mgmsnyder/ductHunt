@@ -16,6 +16,7 @@ class Form extends React.Component {
 		return (
 			<form>
 				<input name="this is a placeholder" />
+				Where does this show up?
 			</form>
 		);
 	}
