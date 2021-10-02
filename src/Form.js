@@ -5,7 +5,9 @@ class Form extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			userFirstName: "Mat",
+			title: "",
+			userFirstName: "",
+			userLastName: "",
 			callerNumber: "",
 		};
 		this.handleChange = this.handleChange.bind(this);
@@ -19,11 +21,42 @@ class Form extends React.Component {
 			<form>
 				<h3>User Information</h3>
 				<label>
+					Title
+					<select value={this.state.title} name="title" onChange={this.handleChange}>
+						<option value="">Select</option>
+						<option label="Mr" value="Mr">
+							Mr
+						</option>
+						<option label="Ms" value="Ms">
+							Ms
+						</option>
+						<option label="Miss" value="Miss">
+							Miss
+						</option>
+						<option label="Mrs" value="Mrs">
+							Mrs
+						</option>
+						<option label="Dr" value="Dr">
+							Dr
+						</option>
+					</select>
+				</label>
+
+				<label>
 					Your First Name:
 					<input
 						name="userFirstName"
 						placeholder="First Name"
 						value={this.userFirstName}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<label>
+					Your Last Name:
+					<input
+						name="userLastName"
+						placeholder="Last Name"
+						value={this.userLastName}
 						onChange={this.handleChange}
 					/>
 				</label>
