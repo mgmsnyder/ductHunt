@@ -1,5 +1,5 @@
 import React from "react";
-import FormSection from "./FormSection";
+// import FormSection from "./FormSection";
 
 class Form extends React.Component {
 	constructor() {
@@ -10,16 +10,16 @@ class Form extends React.Component {
 			userLastName: "",
 			callerNumber: "",
 		};
-		this.handleChange = this.handleChange.bind(this);
 	}
-	handleChange(event) {
+
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 	}
 	render() {
 		return (
-			<form>
-				<h3>User Information</h3>
+			<div>
+				<div class="sectionLabel">User Information</div>
 				<label>
 					Title
 					<select value={this.state.title} name="title" onChange={this.handleChange}>
@@ -60,7 +60,8 @@ class Form extends React.Component {
 						onChange={this.handleChange}
 					/>
 				</label>
-				<h3>Caller Information</h3>
+
+				<div class="sectionLabel">Caller Information</div>
 				<label>
 					Caller Phone Number:
 					<input
@@ -77,7 +78,7 @@ class Form extends React.Component {
 						value: this.state.userFirstName,
 					}}
 				/> */}
-			</form>
+			</div>
 		);
 	}
 }
