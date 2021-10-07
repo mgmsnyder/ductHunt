@@ -19,7 +19,7 @@ class Form extends React.Component {
 			callDate: "",
 			callTime: "",
 			reasonSell:false,
-			reasonWin:false,
+			reasonWon:false,
 			reasonSurvey:false,
 			reasonPolitical:false,
 			reasonDonation:false,
@@ -300,6 +300,69 @@ class Form extends React.Component {
 						checked={this.reasonSell}
 						onChange={this.handleChange}
 					/> Wanted to sell you something
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonWon"
+						checked={this.reasonWon}
+						onChange={this.handleChange}
+					/> Said you won something
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonSurvey"
+						checked={this.reasonSurvey}
+						onChange={this.handleChange}
+					/> Wanted you to do a survey
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonPolitical"
+						checked={this.reasonPolitical}
+						onChange={this.handleChange}
+					/> Tell you a political, or politically related, message
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonDonation"
+						checked={this.reasonDonation}
+						onChange={this.handleChange}
+					/> Looking for a donation from you
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonDebt"
+						checked={this.reasonDebt}
+						onChange={this.handleChange}
+					/> It was a debt or bill collector
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonPsa"
+						checked={this.reasonPsa}
+						onChange={this.handleChange}
+					/> It was information or public service message
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="reasonUnknown"
+						checked={this.reasonUnknown}
+						onChange={this.handleChange}
+					/> You don’t know, or ended the call before finding out
 				</label>
 				{/* <FormSection
 					fields={{
