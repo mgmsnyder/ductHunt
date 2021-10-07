@@ -13,13 +13,29 @@ class Form extends React.Component {
 			callNameOrNumber:"",
 			callDeclaration:"",
 			callerNumber: "",
+			callerID: "",
+			callerAddress: "",
+			callerWebsite: "",
+			callDate: "",
+			callTime: "",
+			reasonSell:false,
+			reasonWin:false,
+			reasonSurvey:false,
+			reasonPolitical:false,
+			reasonDonation:false,
+			reasonDebt:false,
+			reasonPsa:false,
+			reasonUnknown:false,
 			
 		};
 	}
 
 	handleChange = (event) => {
-		const { name, value } = event.target;
+		const { name, value , checked, type} = event.target;
+		type==="checkbox" ?
+		this.setState({ [name]: checked }):
 		this.setState({ [name]: value });
+
 	}
 	render() {
 		return (
@@ -208,12 +224,83 @@ class Form extends React.Component {
 					Caller Phone Number:
 					<input
 						name="callerNumber"
-						placeholder="Phone Number"
+						placeholder="819-555-1234"
 						value={this.callerNumber}
 						onChange={this.handleChange}
 					/>
 				</label>
-				
+				<br />
+				<label>
+				Caller ID / VoIP (819-555-1234, 1234@example.ca):
+					<input
+						name="callerID"
+						placeholder="Displayed name or number"
+						value={this.callerID}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<div class="headerSmall">If they have you any of the following, please enter it here:</div>
+				<br />
+				<label>
+				Mailing address:
+					<input
+						name="callerAddress"
+						placeholder="123 Main St., Anytown Province"
+						value={this.callerAddress}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+				Website:
+					<input
+						name="callerWebsite"
+						placeholder="https://companyname.ca"
+						value={this.callerWebsite}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+				E-mail address:
+					<input
+						name="callerEmail"
+						placeholder="person@companyname.ca"
+						value={this.callerEmail}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+				Date:
+					<input
+						name="callDate"
+						placeholder="1972-11-29"
+						value={this.callDate}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+				Time (24 hour format):
+					<input
+						name="callTime"
+						placeholder="14:38"
+						value={this.callTime}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<div class="headerSmall" >What was the expressed reason for the call? (check all that apply)</div>
+				<label>
+					<input
+						type="checkbox"
+						name="reasonSell"
+						checked={this.reasonSell}
+						onChange={this.handleChange}
+					/> Wanted to sell you something
+				</label>
 				{/* <FormSection
 					fields={{
 						name: "userFirstName",
