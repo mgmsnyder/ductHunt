@@ -8,6 +8,16 @@ class Form extends React.Component {
 			title: "",
 			userFirstName: "",
 			userLastName: "",
+			userAddressLine1: "",
+			userAddressLine2: "",
+			userAddressCountry: "",
+			userAddressCityMunicipality: "",
+			userAddressProvinceTerritory: "",
+			userAddressCode: "",
+			userContactNumber: "",
+			userContactEmail: "",
+			userContactConfirmEmail: "",
+			userContactLanguage: "",
 			callUserAction:"",
 			callOnPickup:"",
 			callNameOrNumber:"",
@@ -26,7 +36,17 @@ class Form extends React.Component {
 			reasonDebt:false,
 			reasonPsa:false,
 			reasonUnknown:false,
-			
+			purchaseStatus:"",
+			purchaseNow:false,
+			purchaseRecent:false,
+			purchaseDistant:false,
+			businessInquiry:false,
+			businessContract:false,
+			businessDivulge:false,
+			businessVisit:false,
+			ceaseNow:false,
+			ceasePrior:false,
+			ceaseRefuse:false,
 		};
 	}
 
@@ -68,7 +88,7 @@ class Form extends React.Component {
 					<input
 						name="userFirstName"
 						placeholder="First Name"
-						value={this.userFirstName}
+						value={this.state.userFirstName}
 						onChange={this.handleChange}
 					/>
 				</label>
@@ -77,7 +97,109 @@ class Form extends React.Component {
 					<input
 						name="userLastName"
 						placeholder="Last Name"
-						value={this.userLastName}
+						value={this.state.userLastName}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<div class="headerSmall">Your address</div>
+				<br />
+				<label>
+					Address line 1:
+					<input
+						name="userAddressLine1"
+						placeholder="Last Name"
+						value={this.state.userAddressLine1}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					Address line 2:
+					<input
+						name="userAddressLine2"
+						placeholder="Last Name"
+						value={this.state.userAddressLine2}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					Country:
+					<input
+						name="userAddressCountry"
+						placeholder="Last Name"
+						value={this.state.userAddressCountry}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					City / Municipality:
+					<input
+						name="userAddressCityMunicipality"
+						placeholder="Last Name"
+						value={this.state.userAddressCityMunicipality}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					Province / Territory:
+					<input
+						name="userAddressProvinceTerritory"
+						placeholder="Last Name"
+						value={this.state.userAddressProvinceTerritory}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					Postal / Zip code:
+					<input
+						name="userAddressCode"
+						placeholder="Last Name"
+						value={this.state.userAddressCode}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<div class="headerSmall">How to contact you</div>
+				<label>
+					Phone number:
+					<input
+						name="userContactNumber"
+						placeholder="Last Name"
+						value={this.state.userContactNumber}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					Email:
+					<input
+						name="userContactEmail"
+						placeholder="janeorjoe@examplemail.com"
+						value={this.state.userContactEmail}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<label>
+					Confirm Email:
+					<input
+						name="userContactConfirmEmail"
+						placeholder="Should be the same as the above"
+						value={this.state.userContactConfirmEmail}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				{/* Change this to a select input */}
+				<label>
+					Preferred language of correspondence:
+					<input
+						name="userContactLanguage"
+						placeholder="English or French"
+						value={this.state.userContactLanguage}
 						onChange={this.handleChange}
 					/>
 				</label>
@@ -225,7 +347,7 @@ class Form extends React.Component {
 					<input
 						name="callerNumber"
 						placeholder="819-555-1234"
-						value={this.callerNumber}
+						value={this.state.callerNumber}
 						onChange={this.handleChange}
 					/>
 				</label>
@@ -257,7 +379,7 @@ class Form extends React.Component {
 					<input
 						name="callerWebsite"
 						placeholder="https://companyname.ca"
-						value={this.callerWebsite}
+						value={this.state.callerWebsite}
 						onChange={this.handleChange}
 					/>
 				</label>
@@ -267,17 +389,17 @@ class Form extends React.Component {
 					<input
 						name="callerEmail"
 						placeholder="person@companyname.ca"
-						value={this.callerEmail}
+						value={this.state.callerEmail}
 						onChange={this.handleChange}
 					/>
 				</label>
 				<br />
 				<label>
-				Date:
+				Date (yyyy-mm-dd):
 					<input
 						name="callDate"
 						placeholder="1972-11-29"
-						value={this.callDate}
+						value={this.state.callDate}
 						onChange={this.handleChange}
 					/>
 				</label>
@@ -287,7 +409,7 @@ class Form extends React.Component {
 					<input
 						name="callTime"
 						placeholder="14:38"
-						value={this.callTime}
+						value={this.state.callTime}
 						onChange={this.handleChange}
 					/>
 				</label>
@@ -297,7 +419,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonSell"
-						checked={this.reasonSell}
+						checked={this.state.reasonSell}
 						onChange={this.handleChange}
 					/> Wanted to sell you something
 				</label>
@@ -306,7 +428,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonWon"
-						checked={this.reasonWon}
+						checked={this.state.reasonWon}
 						onChange={this.handleChange}
 					/> Said you won something
 				</label>
@@ -315,7 +437,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonSurvey"
-						checked={this.reasonSurvey}
+						checked={this.state.reasonSurvey}
 						onChange={this.handleChange}
 					/> Wanted you to do a survey
 				</label>
@@ -324,7 +446,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonPolitical"
-						checked={this.reasonPolitical}
+						checked={this.state.reasonPolitical}
 						onChange={this.handleChange}
 					/> Tell you a political, or politically related, message
 				</label>
@@ -333,7 +455,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonDonation"
-						checked={this.reasonDonation}
+						checked={this.state.reasonDonation}
 						onChange={this.handleChange}
 					/> Looking for a donation from you
 				</label>
@@ -342,7 +464,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonDebt"
-						checked={this.reasonDebt}
+						checked={this.state.reasonDebt}
 						onChange={this.handleChange}
 					/> It was a debt or bill collector
 				</label>
@@ -351,7 +473,7 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonPsa"
-						checked={this.reasonPsa}
+						checked={this.state.reasonPsa}
 						onChange={this.handleChange}
 					/> It was information or public service message
 				</label>
@@ -360,9 +482,127 @@ class Form extends React.Component {
 					<input
 						type="checkbox"
 						name="reasonUnknown"
-						checked={this.reasonUnknown}
+						checked={this.state.reasonUnknown}
 						onChange={this.handleChange}
 					/> You don’t know, or ended the call before finding out
+				</label>
+				<br />
+				<div class="headerSmall" >Have you ever purchased anything from this organization?
+					</div>
+				<label>
+					<input
+						type="radio"
+						value="yes"
+						name="purchaseStatus" 
+						checked={this.state.purchaseStatus==="yes"}
+						onChange={this.handleChange} />{" "}
+						Yes
+				</label>
+				<label>
+					<input
+						type="radio"
+						value="no"
+						name="purchaseStatus" 
+						checked={this.state.purchaseStatus==="no"}
+						onChange={this.handleChange} />{" "}
+						No
+				</label>
+				<br />
+				<div class="headerSmall" >When did you make this purchase?
+					</div>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="purchaseNow"
+						checked={this.state.purchaseNow}
+						onChange={this.handleChange}
+					/> During this call
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="purchaseRecent"
+						checked={this.state.purchaseRecent}
+						onChange={this.handleChange}
+					/> Within the last 18 months
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="purchaseDistant"
+						checked={this.state.purchaseDistant}
+						onChange={this.handleChange}
+					/> More than 18 months ago
+				</label>
+				<br />
+				<div class="headerSmall" >What other business, if any, have you done with this organization? (please check all that apply)</div>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessInquiry"
+						checked={this.state.businessInquiry}
+						onChange={this.handleChange}
+					/> Asked about a product, or service, within the last 6 months
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessContract"
+						checked={this.state.businessContract}
+						onChange={this.handleChange}
+					/> Had a contract that expired
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessDivulge"
+						checked={this.state.businessDivulge}
+						onChange={this.handleChange}
+					/> Provided your personal information through a contest, reward program, or other form
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessVisit"
+						checked={this.state.businessVisit}
+						onChange={this.handleChange}
+					/> A representative from their organization went to your home to provide an estimate or service
+				</label>
+				<br />
+				<div class="headerSmall" >Have you asked not to be called again? (please check all that apply)</div>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessInquiry"
+						checked={this.state.businessInquiry}
+						onChange={this.handleChange}
+					/> During this call
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessContract"
+						checked={this.state.businessContract}
+						onChange={this.handleChange}
+					/> Made a previous request more than 14 days ago
+				</label>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="businessDivulge"
+						checked={this.state.businessDivulge}
+						onChange={this.handleChange}
+					/> They refused to place you on an internal Do Not Call list
 				</label>
 				{/* <FormSection
 					fields={{
