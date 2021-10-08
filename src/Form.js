@@ -18,6 +18,10 @@ class Form extends React.Component {
 			userContactEmail: "",
 			userContactConfirmEmail: "",
 			userContactLanguage: "",
+			userSpammedNumber:"",
+			userSpammedPersonal:false,
+			userSpammedBusiness:false,
+			userSpammedProvider:"",
 			callUserAction:"",
 			callOnPickup:"",
 			callNameOrNumber:"",
@@ -47,6 +51,7 @@ class Form extends React.Component {
 			ceaseNow:false,
 			ceasePrior:false,
 			ceaseRefuse:false,
+			consent:false
 		};
 	}
 
@@ -62,8 +67,11 @@ class Form extends React.Component {
 			<div>
 				<div class="sectionLabel">User Information</div>
 				<label>
-					Title
-					<select value={this.state.title} name="title" onChange={this.handleChange}>
+					Title: {" "}
+					<select 
+						value={this.state.title} 
+						name="title" 
+						onChange={this.handleChange}>
 						<option value="">Select</option>
 						<option label="Mr" value="Mr">
 							Mr
@@ -84,7 +92,7 @@ class Form extends React.Component {
 				</label>
 
 				<label>
-					Your First Name:
+				{" "}Your First Name: {" "}
 					<input
 						name="userFirstName"
 						placeholder="First Name"
@@ -93,7 +101,7 @@ class Form extends React.Component {
 					/>
 				</label>
 				<label>
-					Your Last Name:
+				{" "}Your Last Name: {" "}
 					<input
 						name="userLastName"
 						placeholder="Last Name"
@@ -101,8 +109,8 @@ class Form extends React.Component {
 						onChange={this.handleChange}
 					/>
 				</label>
-				<div class="headerSmall">Your address</div>
 				<br />
+				<div class="headerSmall">Your address</div>
 				<label>
 					Address line 1:
 					<input
@@ -177,7 +185,7 @@ class Form extends React.Component {
 					Email:
 					<input
 						name="userContactEmail"
-						placeholder="janeorjoe@examplemail.com"
+						placeholder="janeorjoe@example.com"
 						value={this.state.userContactEmail}
 						onChange={this.handleChange}
 					/>
@@ -193,17 +201,64 @@ class Form extends React.Component {
 					/>
 				</label>
 				<br />
-				{/* Change this to a select input */}
 				<label>
-					Preferred language of correspondence:
+				Preferred language of correspondence:
+					<select 
+						value={this.state.userContactLanguage} 
+						name="userContactLanguage" 
+						onChange={this.handleChange}>
+						<option value="">Select</option>
+						<option label="English" value="english">
+							English
+						</option>
+						<option label="French" value="french">
+							French
+						</option>
+					</select>
+				</label>
+				<br />
+				<label>
+				Phone number you were called at:
 					<input
-						name="userContactLanguage"
-						placeholder="English or French"
-						value={this.state.userContactLanguage}
+						name="userSpammedNumber"
+						placeholder="819-555-1234"
+						value={this.state.userSpammedNumber}
 						onChange={this.handleChange}
 					/>
 				</label>
 
+				<div class="headerSmall">You use this number as your (please check all that apply)</div>
+				<label>
+					<input
+						type="checkbox"
+						name="userSpammedPersonal"
+						checked={this.state.userSpammedPersonal}
+						onChange={this.handleChange}
+					/>{" "}
+					Personal phone
+				</label>
+				<label>
+					<input
+						type="checkbox"
+						name="userSpammedBusiness"
+						checked={this.state.userSpammedBusiness}
+						onChange={this.handleChange}
+					/>{" "}
+					Business phone
+				</label>
+
+				<br />
+				<label>
+				Provider for this phone number:
+					<input
+						name="userSpammedProvider"
+						placeholder="Bell"
+						value={this.state.userSpammedProvider}
+						onChange={this.handleChange}
+					/>
+				</label>
+				<br />
+				<br />
 				<div class="sectionLabel">Call Event</div>
 				<label>
 					When I received this call I: 
@@ -362,8 +417,8 @@ class Form extends React.Component {
 					/>
 				</label>
 				<br />
-				<div class="headerSmall">If they have you any of the following, please enter it here:</div>
 				<br />
+				<div class="headerSmall">If they gave you any of the following, please enter it here:</div>
 				<label>
 				Mailing address:
 					<input
@@ -604,6 +659,23 @@ class Form extends React.Component {
 						onChange={this.handleChange}
 					/> They refused to place you on an internal Do Not Call list
 				</label>
+
+				<br />
+				<br />
+				<div>Before your request can be completed, a security check must be performed. This is to prevent unauthorized access to the National DNCL. To submit your complaint, please click the box below.</div>
+				<br />
+				<div>“I consent to the CRTC collecting the personal information I have provided in this complaint” The types of information collected can be found in the National DNCL Personal Information Bank on Infosource at <a href="https://crtc.gc.ca/eng/about/sources.htm">https://crtc.gc.ca/eng/about/sources.htm</a>, Bank Number: CRT PPU 075.</div>
+				<br />
+				<label>
+					<input
+						type="checkbox"
+						name="consent"
+						checked={this.state.consent}
+						onChange={this.handleChange}
+					/> I am not a robot
+				</label>
+
+
 				{/* <FormSection
 					fields={{
 						name: "userFirstName",
