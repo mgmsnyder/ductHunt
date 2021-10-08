@@ -5,7 +5,7 @@ class Form extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			title: "",
+			userTitle: "",
 			userFirstName: "",
 			userLastName: "",
 			userAddressLine1: "",
@@ -69,8 +69,8 @@ class Form extends React.Component {
 				<label>
 					Title: {" "}
 					<select 
-						value={this.state.title} 
-						name="title" 
+						value={this.state.userTitle} 
+						name="userTitle" 
 						onChange={this.handleChange}>
 						<option value="">Select</option>
 						<option label="Mr" value="Mr">
