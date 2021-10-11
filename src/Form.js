@@ -53,7 +53,11 @@ class Form extends React.Component {
 			ceaseRefuse:false,
 			consent:false
 		};
-	}
+	};
+
+  formSubmit = ()=>{
+    
+  }
 
 	handleChange = (event) => {
 		const { name, value , checked, type} = event.target;
@@ -674,7 +678,8 @@ class Form extends React.Component {
 						onChange={this.handleChange}
 					/> I am not a robot
 				</label>
-
+				<br />
+				<button onClick={this.formSubmit} >Submit</button>
 
 				{/* <FormSection
 					fields={{
