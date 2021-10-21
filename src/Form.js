@@ -55,15 +55,15 @@ class Form extends React.Component {
     };
   }
 
-  // formSubmit = () => {
-
-  // }
+  formSubmit = () => {
+    const dataState = Object.entries(this.state);
+    console.log(dataState[0])
+  }
 
 	handleChange = (event) => {
     const {
       name, value, checked, type,
 	  } = event.target;
-    console.log(value)
 	  type === 'checkbox'
 	    ? this.setState({ [name]: checked })
 	    : this.setState({ [name]: value });
