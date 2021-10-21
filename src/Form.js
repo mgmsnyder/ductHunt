@@ -57,7 +57,16 @@ class Form extends React.Component {
 
   formSubmit = () => {
     const dataState = Object.entries(this.state);
-    console.log(dataState[0])
+    const dataUser ={};
+    for (let i=0;i<17;i++){
+      dataUser[dataState[i][0]]=dataState[i][1]
+    }
+    const dataCall={}
+    for (let i=17;i<47;i++){
+      dataCall[dataState[i][0]]=dataState[i][1]
+    }
+    console.log(dataUser)
+    console.log(dataCall)
   }
 
 	handleChange = (event) => {
