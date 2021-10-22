@@ -72,11 +72,18 @@ class Form extends React.Component {
     const {
       name, value, checked, type,
 	  } = event.target;
-	  type === 'checkbox'
-	    ? this.setState({ [name]: checked })
+	  type === 'checkbox'? 
+      this.setState({ [name]: checked })
 	    : this.setState({ [name]: value });
 	}
-
+  componentDidMount(){
+    if (localStorage.dataUser!==undefined){
+      const storageUser=JSON.parse(localStorage.dataUser)
+      for (let key in storageUser){
+        this.setState({[key]:storageUser[key]})
+      }
+    }
+  }
 	render() {
 	  return (
   <div>
