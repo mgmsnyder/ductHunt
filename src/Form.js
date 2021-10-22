@@ -65,8 +65,7 @@ class Form extends React.Component {
     for (let i=17;i<47;i++){
       dataCall[dataState[i][0]]=dataState[i][1]
     }
-    console.log(dataUser)
-    console.log(dataCall)
+    localStorage.dataUser = JSON.stringify(dataUser);
   }
 
 	handleChange = (event) => {
