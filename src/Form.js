@@ -55,6 +55,15 @@ class Form extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (localStorage.dataUser !== undefined) {
+      const storageUser = JSON.parse(localStorage.dataUser);
+      for (let key in storageUser) {
+        this.setState({ [key]: storageUser[key] });
+      }
+    }
+  }
+
   formSubmit = () => {
     const dataState = Object.entries(this.state);
     const dataUser = {};
@@ -66,6 +75,7 @@ class Form extends React.Component {
       dataCall[dataState[i][0]] = dataState[i][1];
     }
     localStorage.dataUser = JSON.stringify(dataUser);
+    localStorage.dataCall = JSON.stringify(dataCall);
   };
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
@@ -752,6 +762,7 @@ class Form extends React.Component {
           />{' '}
           I am not a robot
         </label>
+        <button onClick={this.formSubmit}>Submit</button>
 
         {/* <FormSection
           fields={{
