@@ -62,6 +62,12 @@ class Form extends React.Component {
         this.setState({ [key]: storageUser[key] });
       }
     }
+    if (localStorage.dataCall !== undefined) {
+      const storageCall = JSON.parse(localStorage.dataCall);
+      for (let key in storageCall) {
+        this.setState({ [key]: storageCall[key] });
+      }
+    }
   }
 
   formSubmit = () => {
@@ -762,6 +768,7 @@ class Form extends React.Component {
           />{' '}
           I am not a robot
         </label>
+        <br />
         <button onClick={this.formSubmit}>Submit</button>
 
         {/* <FormSection
