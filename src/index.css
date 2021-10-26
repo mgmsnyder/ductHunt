@@ -36,3 +36,6 @@ code {
 a {
   display: inline;
 }
+button {
+  width: 100px;
+}

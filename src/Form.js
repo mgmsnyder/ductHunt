@@ -709,7 +709,7 @@ class Form extends React.Component {
           />
           I am not a robot
         </label>
-
+        <div></div>
         <button onClick={this.formSubmit}>Submit</button>
 
         {/* <FormSection
