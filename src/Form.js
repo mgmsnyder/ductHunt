@@ -740,6 +740,8 @@ class Form extends React.Component {
           />{' '}
           I am not a robot
         </label>
+        <br />
+        <button onClick={this.formSubmit}>Submit</button>
 
         {/* <FormSection
           fields={{
