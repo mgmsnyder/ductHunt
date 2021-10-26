@@ -7,13 +7,32 @@ body {
 .App {
   display:flex;
   flex-direction: column;
-
 }
-div{
+div {
   display:flex;
   flex-direction: column;
-
+}
+.sectionLabel {
+font-size: 1.5em;
+margin-top: 0.4em;
+margin-bottom: 0.2em;
+}
+.headerSmall {
+  font-size: 1.2em;
+}
+label {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+select, input {
+  margin-left: 0.3em;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+#declaration {
+  display:inline
+}
+a {
+  display: inline;
 }
