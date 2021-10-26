@@ -5,7 +5,14 @@ body {
   background-color: #9eb7e9;
 }
 .App {
-  display:flex
+  display:flex;
+  flex-direction: column;
+
+}
+div{
+  display:flex;
+  flex-direction: column;
+
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
