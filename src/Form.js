@@ -82,6 +82,8 @@ class Form extends React.Component {
     }
     localStorage.dataUser = JSON.stringify(dataUser);
     localStorage.dataCall = JSON.stringify(dataCall);
+    console.log(localStorage.dataUser);
+    console.log(localStorage.dataCall);
   };
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
