@@ -18,7 +18,7 @@ const dataUser = {
   "userSpammedPersonal":true,
   "userSpammedBusiness":false,
   "userSpammedProvider":"Rogers"}
-  
+
 const dataCall = {
   "callUserAction":"Answered",
   "callOnPickup":"live",
@@ -57,11 +57,17 @@ const dataCall = {
   try {
     // Navigate to Url
     await driver.get('https://lnnte-dncl.gc.ca/en/Consumer/Complaint/#!/');
-
-    await driver.findElement(By.id('radio-answer-phone')).click();
-
+    if (dataCall.callUserAction==="Answered"){
+      await driver.findElement(By.id('radio-answer-phone')).click();
+    }
     await driver.findElement(By.css('div.submit-container button')).click();
-
+    if (dataCall.callOnPickup==="live"){
+      await driver.findElement(By.id('radio-phone-live')).click();
+    }
+    if (dataCall.callNameOrNumber==="number"){
+      await driver.findElement(By.id('radio-comp-phone')).click();
+    }
+    
   } finally {
   }
 })();
