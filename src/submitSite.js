@@ -8,6 +8,8 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
 
     await driver.findElement(By.id('radio-answer-phone')).click();
 
+    await driver.findElement(By.css('div.submit-container button')).click();
+
   } finally {
   }
 })();
