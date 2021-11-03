@@ -71,8 +71,6 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     if (dataCall.callDeclaration==="yes"){
       await driver.findElement(By.id('radio-declar-1')).click();
     }
-    // await driver.wait(until.elementLocated(By.css('div.submit-container button:last-of-type')), 10000).click();
-    // ASK LUKE WHY THE ABOVE DOES NOT WORK??! This took me 2+ hours to find the below. Progress sure, but at what cost. Last of type seemed to be a problem.
     await driver.findElement(By.css('div.submit-container button:nth-child(2)')).click();
     
     // 3rd Page #Caller details
@@ -80,7 +78,6 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     await driver.findElement(By.id('callerId')).sendKeys(dataCall.callerID);
     await driver.findElement(By.id('address')).sendKeys(dataCall.callerAddress);
     await driver.findElement(By.id('website')).sendKeys(dataCall.callerWebsite);
-    // await driver.findElement(By.css('div.submit-container button:nth-child(2)')).click(); MY GOSH IT HAPPENED AGAIN BUT WHAT MAKES THE NEXT LINE WORK!!??!@?#JN I have decided submit-container was not reliable, which fits since it is a class, not an id. Xpath for lyyyfe. -_-
     await driver.findElement(By.xpath('//*[@id="complaint-3"]/div[3]/button[2]')).click();
     await driver.findElement(By.id('date-container')).sendKeys(dataCall.callDate);
     await driver.findElement(By.id('uib-Hours')).sendKeys(dataCall.callTime.slice(0,2));
