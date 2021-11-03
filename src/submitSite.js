@@ -76,7 +76,72 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     await driver.findElement(By.css('div.submit-container button:nth-child(2)')).click();
     
     // 3rd Page #Caller details
-
+    await driver.findElement(By.id('number')).sendKeys(dataCall.callerNumber);
+    await driver.findElement(By.id('callerId')).sendKeys(dataCall.callerID);
+    await driver.findElement(By.id('address')).sendKeys(dataCall.callerAddress);
+    await driver.findElement(By.id('website')).sendKeys(dataCall.callerWebsite);
+    // await driver.findElement(By.css('div.submit-container button:nth-child(2)')).click(); MY GOSH IT HAPPENED AGAIN BUT WHAT MAKES THE NEXT LINE WORK!!??!@?#JN I have decided submit-container was not reliable, which fits since it is a class, not an id. Xpath for lyyyfe. -_-
+    await driver.findElement(By.xpath('//*[@id="complaint-3"]/div[3]/button[2]')).click();
+    await driver.findElement(By.id('date-container')).sendKeys(dataCall.callDate);
+    await driver.findElement(By.id('uib-Hours')).sendKeys(dataCall.callTime.slice(0,2));
+    await driver.findElement(By.id('uib-Minutes')).sendKeys(dataCall.callTime.slice(-2));
+    if (dataCall.reasonSell){
+      await driver.findElement(By.id('check-comp-sell')).click();
+    }
+    if (dataCall.reasonWon){
+      await driver.findElement(By.id('check-comp-win')).click();
+    }
+    if (dataCall.reasonSurvey){
+      await driver.findElement(By.id('check-comp-survey')).click();
+    }
+    if (dataCall.reasonPolitical){
+      await driver.findElement(By.id('check-comp-political')).click();
+    }
+    if (dataCall.reasonDonation){
+      await driver.findElement(By.id('check-comp-donation')).click();
+    }
+    if (dataCall.reasonDebt){
+      await driver.findElement(By.id('check-comp-debt')).click();
+    }
+    if (dataCall.reasonPsa){
+      await driver.findElement(By.id('check-comp-publicServiceMsg')).click();
+    }
+    if (dataCall.purchaseStatus==="yes"){
+      await driver.findElement(By.id('radio-cp-true')).click();
+      if (dataCall.purchaseNow){
+        await driver.findElement(By.id('check-comp-purchaseDuringCall')).click();
+      }
+      if (dataCall.purchaseRecent){
+        await driver.findElement(By.id('check-comp-purchaseWithin18M')).click();
+      }
+      if (dataCall.purchaseDistant){
+        await driver.findElement(By.id('check-comp-purchaseMoreThan18M')).click();
+      }
+    }else{
+      await driver.findElement(By.id('radio-cp-false')).click();
+    }
+    if (dataCall.businessInquiry){
+      await driver.findElement(By.id('check-comp-askedAboutProduct')).click();
+    }
+    if (dataCall.businessContract){
+      await driver.findElement(By.id('check-comp-contractExpired')).click();
+    }
+    if (dataCall.businessDivulge){
+      await driver.findElement(By.id('check-comp-personalInfo')).click();
+    }
+    if (dataCall.businessVisit){
+      await driver.findElement(By.id('check-comp-serviceEstimate')).click();
+    }
+    if (dataCall.ceaseNow){
+      await driver.findElement(By.id('check-comp-duringCall')).click();
+    }
+    if (dataCall.ceasePrior){
+      await driver.findElement(By.id('check-comp-prev14D')).click();
+    }
+    if (dataCall.ceaseRefuse){
+      await driver.findElement(By.id('check-comp-prevRefused')).click();
+    }
+    await driver.findElement(By.xpath('//*[@id="complaint-4"]/div[18]/button[2]')).click();
   } finally {
   }
 })();
