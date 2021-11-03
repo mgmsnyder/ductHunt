@@ -1,4 +1,4 @@
-import { Builder, By, Key, until } from 'selenium-webdriver';
+import { Builder, By, Key, until, Select } from 'selenium-webdriver';
 
 (async function example() {
   const dataUser = {
@@ -79,6 +79,8 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     await driver.findElement(By.id('address')).sendKeys(dataCall.callerAddress);
     await driver.findElement(By.id('website')).sendKeys(dataCall.callerWebsite);
     await driver.findElement(By.xpath('//*[@id="complaint-3"]/div[3]/button[2]')).click();
+    
+    // 4th Page #Call details
     await driver.findElement(By.id('date-container')).sendKeys(dataCall.callDate);
     await driver.findElement(By.id('uib-Hours')).sendKeys(dataCall.callTime.slice(0,2));
     await driver.findElement(By.id('uib-Minutes')).sendKeys(dataCall.callTime.slice(-2));
@@ -139,6 +141,10 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
       await driver.findElement(By.id('check-comp-prevRefused')).click();
     }
     await driver.findElement(By.xpath('//*[@id="complaint-4"]/div[18]/button[2]')).click();
+    // 5th Page #Your details
+    if (dataUser.userTitle!==""){
+      await driver.findElement(By.id('title')).click();
+    }
   } finally {
   }
 })();
