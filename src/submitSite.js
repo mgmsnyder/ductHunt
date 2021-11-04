@@ -183,6 +183,11 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     }
     await driver.findElement(By.css(`#provider [value*="${dataUser.userSpammedProvider}"]`)).click();
     await driver.findElement(By.xpath('//*[@id="complaint-5"]/div[20]/button[2]')).click();
+    // Unsure how to proceed to click the recaptcha, element cannot be located. Scrolling does not seem simple.
+    // await driver.findElement(By.xpath('//*[@id="wb-dtmd"]/dd/time')).click();
+    // driver.sendKeys(Key.PAGE_DOWN);
+    // let nocap = await driver.wait(until.elementLocated(By.xpath('//*[@id="recaptcha-anchor"]/div[1]')), 1000);
+    // nocap.click();
 
   } finally {
   }
