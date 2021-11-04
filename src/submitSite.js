@@ -1,4 +1,4 @@
-import { Builder, By, Key, until, Select } from 'selenium-webdriver';
+import { Builder, By, Key, until } from 'selenium-webdriver';
 
 (async function example() {
   const dataUser = {
@@ -143,8 +143,31 @@ import { Builder, By, Key, until, Select } from 'selenium-webdriver';
     await driver.findElement(By.xpath('//*[@id="complaint-4"]/div[18]/button[2]')).click();
     // 5th Page #Your details
     if (dataUser.userTitle!==""){
-      await driver.findElement(By.id('title')).click();
+      await driver.findElement(By.css(`#title [label*=${dataUser.userTitle}]`)).click();
     }
+    await driver.findElement(By.id('firstName')).sendKeys(dataUser.userFirstName);
+    await driver.findElement(By.id('lastname')).sendKeys(dataUser.userLastName);
+    await driver.findElement(By.id('address1')).sendKeys(dataUser.userAddressLine1);
+    await driver.findElement(By.id('address2')).sendKeys(dataUser.userAddressLine2);
+    // User address will be left as Canada for simplicity
+    await driver.findElement(By.id('city')).sendKeys(dataUser.userAddressCityMunicipality);
+    
+    let province;
+    if (dataUser.userAddressProvinceTerritory==="Alberta") {province = "object:589"}
+    else if (dataUser.userAddressProvinceTerritory==="British Columbia") {province = "object:590"}
+    else if (dataUser.userAddressProvinceTerritory==="Manitoba") {province = "object:591"}
+    else if (dataUser.userAddressProvinceTerritory==="New Brunswick") {province = "object:592"}
+    else if (dataUser.userAddressProvinceTerritory==="Newfoundland and Labrador") {province = "object:593"}
+    else if (dataUser.userAddressProvinceTerritory==="Northwest Territories") {province = "object:594"}
+    else if (dataUser.userAddressProvinceTerritory==="Nova Scotia") {province = "object:595"}
+    else if (dataUser.userAddressProvinceTerritory==="Nunavut") {province = "object:596"}
+    else if (dataUser.userAddressProvinceTerritory==="Ontario") {province = "object:597";}
+    else if (dataUser.userAddressProvinceTerritory==="Prince Edward Island") {province = "object:598"}
+    else if (dataUser.userAddressProvinceTerritory==="Quebec") {province = "object:599"}
+    else if (dataUser.userAddressProvinceTerritory==="Saskatchewan") {province = "object:600"}
+    else if (dataUser.userAddressProvinceTerritory==="Yukon") {province = "object:601"}
+    await driver.findElement(By.css(`#province [value*="${province}"]`)).click();
+
   } finally {
   }
 })();
