@@ -10,7 +10,7 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     "userAddressCountry":"Canada",
     "userAddressCityMunicipality":"Waterloo",
     "userAddressProvinceTerritory":"Ontario",
-    "userAddressCode":"1A1 2B2",
+    "userAddressCode":"N1N 2H2",
     "userContactNumber":"819-555-1234",
     "userContactEmail":"janeandjoe@name.com",
     "userContactConfirmEmail":"janeandjoe@name.com",
@@ -167,6 +167,22 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     else if (dataUser.userAddressProvinceTerritory==="Saskatchewan") {province = "object:600"}
     else if (dataUser.userAddressProvinceTerritory==="Yukon") {province = "object:601"}
     await driver.findElement(By.css(`#province [value*="${province}"]`)).click();
+    await driver.findElement(By.id('zip')).sendKeys(dataUser.userAddressCode);
+    await driver.findElement(By.id('phone1')).sendKeys(dataUser.userContactNumber);
+    await driver.findElement(By.id('email')).sendKeys(dataUser.userContactEmail);
+    await driver.findElement(By.id('confirmEmail')).sendKeys(dataUser.userContactConfirmEmail);
+
+    if(dataUser.userContactLanguage==="english") await driver.findElement(By.css(`#language [value*="object:34"]`)).click();
+    else if (dataUser.userContactLanguage==="french") await driver.findElement(By.css(`#language [value*="object:35"]`)).click();
+    await driver.findElement(By.id('calledAt')).sendKeys(dataUser.userSpammedNumber);
+    if (dataUser.userSpammedPersonal){
+      await driver.findElement(By.id('incidentPhoneIsPersonal')).click();
+    }
+    if (dataUser.userSpammedBusiness){
+      await driver.findElement(By.id('incidentPhoneIsBusiness')).click();
+    }
+    await driver.findElement(By.css(`#provider [value*="${dataUser.userSpammedProvider}"]`)).click();
+    await driver.findElement(By.xpath('//*[@id="complaint-5"]/div[20]/button[2]')).click();
 
   } finally {
   }
