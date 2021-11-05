@@ -183,6 +183,9 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     }
     await driver.findElement(By.css(`#provider [value*="${dataUser.userSpammedProvider}"]`)).click();
     await driver.findElement(By.xpath('//*[@id="complaint-5"]/div[20]/button[2]')).click();
+    window.scroll(0,2000);
+    // await driver.findElement(By.xpath('//*[@id="wb-auto-8"]/form/div/div[32]/button[1]')).scrollIntoView();
+    // await document.querySelector("#wb-auto-8 > form > div > div.submit-container > button.btn-rounded.btn-secondary.ng-binding").scrollIntoView();
     // Unsure how to proceed to click the recaptcha, element cannot be located. Scrolling does not seem simple.
     // await driver.findElement(By.xpath('//*[@id="wb-dtmd"]/dd/time')).click();
     // driver.sendKeys(Key.PAGE_DOWN);
