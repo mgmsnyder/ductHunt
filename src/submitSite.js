@@ -1,4 +1,10 @@
-import { Builder, By, Key, until } from 'selenium-webdriver';
+import { Builder, By } from 'selenium-webdriver';
+
+const submitFirstPageCSS = 'div.submit-container button';
+const submitSecondPageCSS = 'div.submit-container button:nth-child(2)';
+const submitThirdPageXpath = '//*[@id="complaint-3"]/div[3]/button[2]';
+const submitFourthPageXpath = '//*[@id="complaint-4"]/div[18]/button[2]';
+const submitFifthPageXpath = '//*[@id="complaint-5"]/div[20]/button[2]';
 
 (async function example() {
   const dataUser = {
@@ -59,7 +65,7 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     if (dataCall.callUserAction==="Answered"){
       await driver.findElement(By.id('radio-answer-phone')).click();
     }
-    await driver.findElement(By.css('div.submit-container button')).click();
+    await driver.findElement(By.css(submitFirstPageCSS)).click();
     
     // 2nd page #Complaint details
     if (dataCall.callOnPickup==="live"){
@@ -71,14 +77,14 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     if (dataCall.callDeclaration==="yes"){
       await driver.findElement(By.id('radio-declar-1')).click();
     }
-    await driver.findElement(By.css('div.submit-container button:nth-child(2)')).click();
+    await driver.findElement(By.css(submitSecondPageCSS)).click();
     
     // 3rd Page #Caller details
     await driver.findElement(By.id('number')).sendKeys(dataCall.callerNumber);
     await driver.findElement(By.id('callerId')).sendKeys(dataCall.callerID);
     await driver.findElement(By.id('address')).sendKeys(dataCall.callerAddress);
     await driver.findElement(By.id('website')).sendKeys(dataCall.callerWebsite);
-    await driver.findElement(By.xpath('//*[@id="complaint-3"]/div[3]/button[2]')).click();
+    await driver.findElement(By.xpath(submitThirdPageXpath)).click();
     
     // 4th Page #Call details
     await driver.findElement(By.id('date-container')).sendKeys(dataCall.callDate);
@@ -140,7 +146,7 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
     if (dataCall.ceaseRefuse){
       await driver.findElement(By.id('check-comp-prevRefused')).click();
     }
-    await driver.findElement(By.xpath('//*[@id="complaint-4"]/div[18]/button[2]')).click();
+    await driver.findElement(By.xpath(submitFourthPageXpath)).click();
     // 5th Page #Your details
     if (dataUser.userTitle!==""){
       await driver.findElement(By.css(`#title [label*=${dataUser.userTitle}]`)).click();
@@ -182,7 +188,7 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
       await driver.findElement(By.id('incidentPhoneIsBusiness')).click();
     }
     await driver.findElement(By.css(`#provider [value*="${dataUser.userSpammedProvider}"]`)).click();
-    await driver.findElement(By.xpath('//*[@id="complaint-5"]/div[20]/button[2]')).click();
+    await driver.findElement(By.xpath(submitFifthPageXpath)).click();
     // window.scroll(0,2000);
     // await driver.findElement(By.xpath('//*[@id="wb-auto-8"]/form/div/div[32]/button[1]')).scrollIntoView();
     // await document.querySelector("#wb-auto-8 > form > div > div.submit-container > button.btn-rounded.btn-secondary.ng-binding").scrollIntoView();
