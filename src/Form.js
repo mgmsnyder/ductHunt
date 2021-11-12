@@ -55,6 +55,10 @@ class Form extends React.Component {
     };
   }
 
+  validCheck =(event, pattern)=>{
+    console.log(event)
+  }
+
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     type === 'checkbox'
@@ -98,6 +102,7 @@ class Form extends React.Component {
             placeholder="First Name"
             value={this.state.userFirstName}
             onChange={this.handleChange}
+            onBlur={this.validCheck()}
           />
         </label>
         <label>
