@@ -109,7 +109,6 @@ class Form extends React.Component {
           />
         </label>
 
-        {/* <div className="headerSmall">Your address</div> */}
         <label>
           Address line 1:
           <input
