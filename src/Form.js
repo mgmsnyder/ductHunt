@@ -1,6 +1,8 @@
 import React from 'react';
 // import FormSection from "./FormSection";
 
+const patternName = /^\S+$/
+
 class Form extends React.Component {
   constructor() {
     super();
@@ -55,8 +57,14 @@ class Form extends React.Component {
     };
   }
 
-  validCheck =(event, pattern)=>{
-    console.log(event)
+  validName =(event)=>{
+    // let target = event.target
+    if (patternName.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+    // console.log(event.target)
   }
 
   handleChange = (event) => {
@@ -102,8 +110,9 @@ class Form extends React.Component {
             placeholder="First Name"
             value={this.state.userFirstName}
             onChange={this.handleChange}
-            onBlur={this.validCheck()}
-          />
+            required
+            onBlur={this.validName}
+            />
         </label>
         <label>
           {' '}
@@ -113,6 +122,8 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userLastName}
             onChange={this.handleChange}
+            required
+            onBlur={this.validName}
           />
         </label>
         <br />
