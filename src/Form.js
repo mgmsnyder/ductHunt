@@ -2,6 +2,7 @@ import React from 'react';
 // import FormSection from "./FormSection";
 
 const patternName = /^\S+$/
+const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
 
 class Form extends React.Component {
   constructor() {
@@ -58,13 +59,19 @@ class Form extends React.Component {
   }
 
   validName =(event)=>{
-    // let target = event.target
     if (patternName.test(event.target.value)){
       event.target.className = 'valid'
     }else{
       event.target.className = 'invalid'
     }
     // console.log(event.target)
+  }
+  validAddress =(event)=>{
+    if (patternAddress.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
   }
 
   handleChange = (event) => {
@@ -132,9 +139,11 @@ class Form extends React.Component {
           Address line 1:
           <input
             name="userAddressLine1"
-            placeholder="Last Name"
+            placeholder="123 Queen St"
             value={this.state.userAddressLine1}
             onChange={this.handleChange}
+            required
+            onBlur={this.validAddress}
           />
         </label>
         <br />
@@ -145,6 +154,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressLine2}
             onChange={this.handleChange}
+            onBlur={this.validAddress}
           />
         </label>
         <br />
