@@ -3,6 +3,7 @@ import React from 'react';
 
 const patternName = /^\S+$/
 const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
+const patternZip = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
 
 class Form extends React.Component {
   constructor() {
@@ -73,7 +74,14 @@ class Form extends React.Component {
       event.target.className = 'invalid'
     }
   }
-
+  validZip =(event)=>{
+    if (patternZip.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+  }
+  
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     type === 'checkbox'
@@ -195,6 +203,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressCode}
             onChange={this.handleChange}
+            onBlur={this.validZip}
           />
         </label>
         <div class="headerSmall">How to contact you</div>
