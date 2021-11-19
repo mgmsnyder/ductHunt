@@ -3,7 +3,7 @@ import React from 'react';
 
 const patternName = /^\S+$/
 const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
-const patternZip = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
+const patternPostal = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
 
 class Form extends React.Component {
   constructor() {
@@ -74,8 +74,8 @@ class Form extends React.Component {
       event.target.className = 'invalid'
     }
   }
-  validZip =(event)=>{
-    if (patternZip.test(event.target.value)){
+  validPostal =(event)=>{
+    if (patternPostal.test(event.target.value)){
       event.target.className = 'valid'
     }else{
       event.target.className = 'invalid'
@@ -203,7 +203,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressCode}
             onChange={this.handleChange}
-            onBlur={this.validZip}
+            onBlur={this.validPostal}
           />
         </label>
         <div class="headerSmall">How to contact you</div>
