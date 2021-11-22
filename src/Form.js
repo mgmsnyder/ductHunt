@@ -4,6 +4,7 @@ import React from 'react';
 const patternName = /^\S+$/
 const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
 const patternPostal = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
+const patternPhone = /(1-?)?\(?\d{3}(\)|-)?\d{3}-?\d{4}/
 
 class Form extends React.Component {
   constructor() {
@@ -76,6 +77,13 @@ class Form extends React.Component {
   }
   validPostal =(event)=>{
     if (patternPostal.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+  }
+  validPhone =(event)=>{
+    if (patternPhone.test(event.target.value)){
       event.target.className = 'valid'
     }else{
       event.target.className = 'invalid'
@@ -214,6 +222,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userContactNumber}
             onChange={this.handleChange}
+            onBlur={this.validPhone}
           />
         </label>
         <br />
