@@ -5,6 +5,7 @@ const patternName = /^\S+$/
 const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
 const patternPostal = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
 const patternPhone = /(1-?)?\(?\d{3}(\)|-)?\d{3}-?\d{4}/
+const patternEmail = /^[[:alnum:]]+@[[:alnum:]]+\.[[:alnum:]]{1,5}(\.[[:alnum:]]{1,5})?$/
 
 class Form extends React.Component {
   constructor() {
@@ -84,6 +85,13 @@ class Form extends React.Component {
   }
   validPhone =(event)=>{
     if (patternPhone.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+  }
+  validEmail =(event)=>{
+    if (patternEmail.test(event.target.value)){
       event.target.className = 'valid'
     }else{
       event.target.className = 'invalid'
@@ -233,7 +241,8 @@ class Form extends React.Component {
             placeholder="janeorjoe@example.com"
             value={this.state.userContactEmail}
             onChange={this.handleChange}
-          />
+            onBlue={this.validEmail}
+            />
         </label>
         <br />
         <label>
@@ -243,6 +252,7 @@ class Form extends React.Component {
             placeholder="Should be the same as the above"
             value={this.state.userContactConfirmEmail}
             onChange={this.handleChange}
+            onBlue={this.validEmail}
           />
         </label>
         <br />
@@ -269,6 +279,8 @@ class Form extends React.Component {
             placeholder="819-555-1234"
             value={this.state.userSpammedNumber}
             onChange={this.handleChange}
+            required
+            onBlur={this.validPhone}
           />
         </label>
 
