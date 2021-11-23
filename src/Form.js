@@ -55,6 +55,36 @@ class Form extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (localStorage.dataUser !== undefined) {
+      const storageUser = JSON.parse(localStorage.dataUser);
+      for (let key in storageUser) {
+        this.setState({ [key]: storageUser[key] });
+      }
+    }
+    if (localStorage.dataCall !== undefined) {
+      const storageCall = JSON.parse(localStorage.dataCall);
+      for (let key in storageCall) {
+        this.setState({ [key]: storageCall[key] });
+      }
+    }
+  }
+
+  formSubmit = () => {
+    const dataState = Object.entries(this.state);
+    const dataUser = {};
+    for (let i = 0; i < 17; i++) {
+      dataUser[dataState[i][0]] = dataState[i][1];
+    }
+    const dataCall = {};
+    for (let i = 17; i < 47; i++) {
+      dataCall[dataState[i][0]] = dataState[i][1];
+    }
+    localStorage.dataUser = JSON.stringify(dataUser);
+    localStorage.dataCall = JSON.stringify(dataCall);
+    console.log(localStorage.dataUser);
+    console.log(localStorage.dataCall);
+  };
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     type === 'checkbox'
