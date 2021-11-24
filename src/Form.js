@@ -98,6 +98,36 @@ class Form extends React.Component {
     }
   }
   
+  componentDidMount() {
+    if (localStorage.dataUser !== undefined) {
+      const storageUser = JSON.parse(localStorage.dataUser);
+      for (let key in storageUser) {
+        this.setState({ [key]: storageUser[key] });
+      }
+    }
+    if (localStorage.dataCall !== undefined) {
+      const storageCall = JSON.parse(localStorage.dataCall);
+      for (let key in storageCall) {
+        this.setState({ [key]: storageCall[key] });
+      }
+    }
+  }
+
+  formSubmit = () => {
+    const dataState = Object.entries(this.state);
+    const dataUser = {};
+    for (let i = 0; i < 17; i++) {
+      dataUser[dataState[i][0]] = dataState[i][1];
+    }
+    const dataCall = {};
+    for (let i = 17; i < 47; i++) {
+      dataCall[dataState[i][0]] = dataState[i][1];
+    }
+    localStorage.dataUser = JSON.stringify(dataUser);
+    localStorage.dataCall = JSON.stringify(dataCall);
+    console.log(localStorage.dataUser);
+    console.log(localStorage.dataCall);
+  };
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     type === 'checkbox'
@@ -107,9 +137,9 @@ class Form extends React.Component {
   render() {
     return (
       <div>
-        <div class="sectionLabel">User Information</div>
+        <div className="sectionLabel">User Information</div>
         <label>
-          Title:{' '}
+          Title:
           <select
             value={this.state.userTitle}
             name="userTitle"
@@ -134,8 +164,7 @@ class Form extends React.Component {
         </label>
 
         <label>
-          {' '}
-          Your First Name:{' '}
+          First Name:
           <input
             name="userFirstName"
             placeholder="First Name"
@@ -146,8 +175,7 @@ class Form extends React.Component {
             />
         </label>
         <label>
-          {' '}
-          Your Last Name:{' '}
+          Last Name:
           <input
             name="userLastName"
             placeholder="Last Name"
@@ -157,8 +185,7 @@ class Form extends React.Component {
             onBlur={this.validName}
           />
         </label>
-        <br />
-        <div class="headerSmall">Your address</div>
+
         <label>
           Address line 1:
           <input
@@ -170,7 +197,7 @@ class Form extends React.Component {
             onBlur={this.validAddress}
           />
         </label>
-        <br />
+
         <label>
           Address line 2:
           <input
@@ -181,7 +208,7 @@ class Form extends React.Component {
             onBlur={this.validAddress}
           />
         </label>
-        <br />
+
         <label>
           Country:
           <input
@@ -191,7 +218,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           City / Municipality:
           <input
@@ -201,7 +228,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           Province / Territory:
           <input
@@ -211,7 +238,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           Postal / Zip code:
           <input
@@ -222,7 +249,7 @@ class Form extends React.Component {
             onBlur={this.validPostal}
           />
         </label>
-        <div class="headerSmall">How to contact you</div>
+        <div className="headerSmall">How to contact you</div>
         <label>
           Phone number:
           <input
@@ -233,7 +260,7 @@ class Form extends React.Component {
             onBlur={this.validPhone}
           />
         </label>
-        <br />
+
         <label>
           Email:
           <input
@@ -244,7 +271,7 @@ class Form extends React.Component {
             onBlue={this.validEmail}
             />
         </label>
-        <br />
+
         <label>
           Confirm Email:
           <input
@@ -255,7 +282,7 @@ class Form extends React.Component {
             onBlue={this.validEmail}
           />
         </label>
-        <br />
+
         <label>
           Preferred language of correspondence:
           <select
@@ -271,7 +298,8 @@ class Form extends React.Component {
             </option>
           </select>
         </label>
-        <br />
+
+        <div className="sectionLabel">Call Event</div>
         <label>
           Phone number you were called at:
           <input
@@ -284,7 +312,7 @@ class Form extends React.Component {
           />
         </label>
 
-        <div class="headerSmall">
+        <div className="question">
           You use this number as your (please check all that apply)
         </div>
         <label>
@@ -293,7 +321,7 @@ class Form extends React.Component {
             name="userSpammedPersonal"
             checked={this.state.userSpammedPersonal}
             onChange={this.handleChange}
-          />{' '}
+          />
           Personal phone
         </label>
         <label>
@@ -302,11 +330,10 @@ class Form extends React.Component {
             name="userSpammedBusiness"
             checked={this.state.userSpammedBusiness}
             onChange={this.handleChange}
-          />{' '}
+          />
           Business phone
         </label>
 
-        <br />
         <label>
           Provider for this phone number:
           <input
@@ -316,165 +343,139 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
-        <br />
-        <div class="sectionLabel">Call Event</div>
+
+        <div>When I received this call I:</div>
         <label>
-          When I received this call I:
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="Answered"
-              name="callUserAction"
-              checked={this.state.callUserAction === 'Answered'}
-              onChange={this.handleChange}
-            />{' '}
-            Answered the phone
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="Unanswered"
-              name="callUserAction"
-              checked={this.state.callUserAction === 'Unanswered'}
-              onChange={this.handleChange}
-            />{' '}
-            Did not answer the phone
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="Message"
-              name="callUserAction"
-              checked={this.state.callUserAction === 'Message'}
-              onChange={this.handleChange}
-            />{' '}
-            Received a voice mail message
-          </label>
+          <input
+            type="radio"
+            value="Answered"
+            name="callUserAction"
+            checked={this.state.callUserAction === 'Answered'}
+            onChange={this.handleChange}
+          />
+          Answered the phone
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Unanswered"
+            name="callUserAction"
+            checked={this.state.callUserAction === 'Unanswered'}
+            onChange={this.handleChange}
+          />
+          Did not answer the phone
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Message"
+            name="callUserAction"
+            checked={this.state.callUserAction === 'Message'}
+            onChange={this.handleChange}
+          />
+          Received a voice mail message
         </label>
 
-        <br />
+        <div>What happened after you answered the phone?</div>
         <label>
-          What happened after you answered the phone?
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="live"
-              name="callOnPickup"
-              checked={this.state.callOnPickup === 'live'}
-              onChange={this.handleChange}
-            />{' '}
-            It was a live person
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="recording"
-              name="callOnPickup"
-              checked={this.state.callOnPickup === 'recording'}
-              onChange={this.handleChange}
-            />{' '}
-            It was a pre-recorded message
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="hold"
-              name="callOnPickup"
-              checked={this.state.callOnPickup === 'hold'}
-              onChange={this.handleChange}
-            />{' '}
-            A pre-recorded message asked me to hold for a live person
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="vacant"
-              name="callOnPickup"
-              checked={this.state.callOnPickup === 'vacant'}
-              onChange={this.handleChange}
-            />{' '}
-            There was no one on the line
-          </label>
+          <input
+            type="radio"
+            value="live"
+            name="callOnPickup"
+            checked={this.state.callOnPickup === 'live'}
+            onChange={this.handleChange}
+          />
+          It was a live person
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="recording"
+            name="callOnPickup"
+            checked={this.state.callOnPickup === 'recording'}
+            onChange={this.handleChange}
+          />
+          It was a pre-recorded message
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="hold"
+            name="callOnPickup"
+            checked={this.state.callOnPickup === 'hold'}
+            onChange={this.handleChange}
+          />
+          A pre-recorded message asked me to hold for a live person
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="vacant"
+            name="callOnPickup"
+            checked={this.state.callOnPickup === 'vacant'}
+            onChange={this.handleChange}
+          />
+          There was no one on the line
         </label>
 
-        <br />
-        <label>
+        <div>
           To file a complaint, you must know the name or phone number of the
-          organization.
-          <br />
-          Please indicate which of the following you have
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="name"
-              name="callNameOrNumber"
-              checked={this.state.callNameOrNumber === 'name'}
-              onChange={this.handleChange}
-            />{' '}
-            The name of the organization
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="number"
-              name="callNameOrNumber"
-              checked={this.state.callNameOrNumber === 'number'}
-              onChange={this.handleChange}
-            />{' '}
-            The phone number of the organization
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="both"
-              name="callNameOrNumber"
-              checked={this.state.callNameOrNumber === 'both'}
-              onChange={this.handleChange}
-            />{' '}
-            Both the name and phone number of the organization
-          </label>
-        </label>
-        <br />
-
+          organization. Please indicate which of the following you have
+        </div>
         <label>
-          I declare that I am providing accurate information:
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="yes"
-              name="callDeclaration"
-              checked={this.state.callDeclaration === 'yes'}
-              onChange={this.handleChange}
-            />{' '}
-            Yes
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="no"
-              name="callDeclaration"
-              checked={this.state.callDeclaration === 'no'}
-              onChange={this.handleChange}
-            />{' '}
-            No
-          </label>
+          <input
+            type="radio"
+            value="name"
+            name="callNameOrNumber"
+            checked={this.state.callNameOrNumber === 'name'}
+            onChange={this.handleChange}
+          />
+          The name of the organization
         </label>
-        <br />
+        <label>
+          <input
+            type="radio"
+            value="number"
+            name="callNameOrNumber"
+            checked={this.state.callNameOrNumber === 'number'}
+            onChange={this.handleChange}
+          />
+          The phone number of the organization
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="both"
+            name="callNameOrNumber"
+            checked={this.state.callNameOrNumber === 'both'}
+            onChange={this.handleChange}
+          />
+          Both the name and phone number of the organization
+        </label>
 
-        <div class="sectionLabel">Caller Information</div>
+        <div>I declare that I am providing accurate information:</div>
+        <label>
+          <input
+            type="radio"
+            value="yes"
+            name="callDeclaration"
+            checked={this.state.callDeclaration === 'yes'}
+            onChange={this.handleChange}
+          />
+          Yes
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="no"
+            name="callDeclaration"
+            checked={this.state.callDeclaration === 'no'}
+            onChange={this.handleChange}
+          />
+          No
+        </label>
+
+        <div className="sectionLabel">Caller Information</div>
         <label>
           Caller Phone Number:
           <input
@@ -484,7 +485,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           Caller ID / VoIP (819-555-1234, 1234@example.ca):
           <input
@@ -494,9 +495,8 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
-        <br />
-        <div class="headerSmall">
+
+        <div className="headerSmall">
           If they gave you any of the following, please enter it here:
         </div>
         <label>
@@ -508,7 +508,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           Website:
           <input
@@ -518,7 +518,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           E-mail address:
           <input
@@ -528,7 +528,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           Date (yyyy-mm-dd):
           <input
@@ -538,7 +538,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
+
         <label>
           Time (24 hour format):
           <input
@@ -548,8 +548,8 @@ class Form extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <br />
-        <div class="headerSmall">
+
+        <div className="headerSmall">
           What was the expressed reason for the call? (check all that apply)
         </div>
         <label>
@@ -558,81 +558,81 @@ class Form extends React.Component {
             name="reasonSell"
             checked={this.state.reasonSell}
             onChange={this.handleChange}
-          />{' '}
+          />
           Wanted to sell you something
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonWon"
             checked={this.state.reasonWon}
             onChange={this.handleChange}
-          />{' '}
+          />
           Said you won something
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonSurvey"
             checked={this.state.reasonSurvey}
             onChange={this.handleChange}
-          />{' '}
+          />
           Wanted you to do a survey
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonPolitical"
             checked={this.state.reasonPolitical}
             onChange={this.handleChange}
-          />{' '}
+          />
           Tell you a political, or politically related, message
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonDonation"
             checked={this.state.reasonDonation}
             onChange={this.handleChange}
-          />{' '}
+          />
           Looking for a donation from you
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonDebt"
             checked={this.state.reasonDebt}
             onChange={this.handleChange}
-          />{' '}
+          />
           It was a debt or bill collector
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonPsa"
             checked={this.state.reasonPsa}
             onChange={this.handleChange}
-          />{' '}
+          />
           It was information or public service message
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="reasonUnknown"
             checked={this.state.reasonUnknown}
             onChange={this.handleChange}
-          />{' '}
+          />
           You don’t know, or ended the call before finding out
         </label>
-        <br />
-        <div class="headerSmall">
+
+        <div className="headerSmall">
           Have you ever purchased anything from this organization?
         </div>
         <label>
@@ -642,7 +642,7 @@ class Form extends React.Component {
             name="purchaseStatus"
             checked={this.state.purchaseStatus === 'yes'}
             onChange={this.handleChange}
-          />{' '}
+          />
           Yes
         </label>
         <label>
@@ -652,132 +652,130 @@ class Form extends React.Component {
             name="purchaseStatus"
             checked={this.state.purchaseStatus === 'no'}
             onChange={this.handleChange}
-          />{' '}
+          />
           No
         </label>
-        <br />
-        <div class="headerSmall">When did you make this purchase?</div>
-        <br />
+
+        <div className="headerSmall">When did you make this purchase?</div>
+
         <label>
           <input
             type="checkbox"
             name="purchaseNow"
             checked={this.state.purchaseNow}
             onChange={this.handleChange}
-          />{' '}
+          />
           During this call
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="purchaseRecent"
             checked={this.state.purchaseRecent}
             onChange={this.handleChange}
-          />{' '}
+          />
           Within the last 18 months
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="purchaseDistant"
             checked={this.state.purchaseDistant}
             onChange={this.handleChange}
-          />{' '}
+          />
           More than 18 months ago
         </label>
-        <br />
-        <div class="headerSmall">
+
+        <div className="headerSmall">
           What other business, if any, have you done with this organization?
           (please check all that apply)
         </div>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessInquiry"
             checked={this.state.businessInquiry}
             onChange={this.handleChange}
-          />{' '}
+          />
           Asked about a product, or service, within the last 6 months
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessContract"
             checked={this.state.businessContract}
             onChange={this.handleChange}
-          />{' '}
+          />
           Had a contract that expired
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessDivulge"
             checked={this.state.businessDivulge}
             onChange={this.handleChange}
-          />{' '}
+          />
           Provided your personal information through a contest, reward program,
           or other form
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessVisit"
             checked={this.state.businessVisit}
             onChange={this.handleChange}
-          />{' '}
+          />
           A representative from their organization went to your home to provide
           an estimate or service
         </label>
-        <br />
-        <div class="headerSmall">
+
+        <div className="headerSmall">
           Have you asked not to be called again? (please check all that apply)
         </div>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessInquiry"
             checked={this.state.businessInquiry}
             onChange={this.handleChange}
-          />{' '}
+          />
           During this call
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessContract"
             checked={this.state.businessContract}
             onChange={this.handleChange}
-          />{' '}
+          />
           Made a previous request more than 14 days ago
         </label>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="businessDivulge"
             checked={this.state.businessDivulge}
             onChange={this.handleChange}
-          />{' '}
+          />
           They refused to place you on an internal Do Not Call list
         </label>
 
-        <br />
-        <br />
         <div>
           Before your request can be completed, a security check must be
           performed. This is to prevent unauthorized access to the National
           DNCL. To submit your complaint, please click the box below.
         </div>
-        <br />
-        <div>
+
+        <div id="declaration">
           “I consent to the CRTC collecting the personal information I have
           provided in this complaint” The types of information collected can be
           found in the National DNCL Personal Information Bank on Infosource at{' '}
@@ -786,16 +784,18 @@ class Form extends React.Component {
           </a>
           , Bank Number: CRT PPU 075.
         </div>
-        <br />
+
         <label>
           <input
             type="checkbox"
             name="consent"
             checked={this.state.consent}
             onChange={this.handleChange}
-          />{' '}
+          />
           I am not a robot
         </label>
+        <div></div>
+        <button onClick={this.formSubmit}>Submit</button>
 
         {/* <FormSection
           fields={{
