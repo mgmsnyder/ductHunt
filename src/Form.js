@@ -2,10 +2,11 @@ import React from 'react';
 // import FormSection from "./FormSection";
 
 const patternName = /^\S+$/
-const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
+// const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
+const patternAddress = /^[a-zA-Z0-9\-.]+(\s[a-zA-Z0-9\-.]+)+$/
 const patternPostal = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
 const patternPhone = /(1-?)?\(?\d{3}(\)|-)?\d{3}-?\d{4}/
-const patternEmail = /^[[:alnum:]]+@[[:alnum:]]+\.[[:alnum:]]{1,5}(\.[[:alnum:]]{1,5})?$/
+const patternEmail = /^[a-zA-Z0-9]+([a-zA-Z0-9.]+)*@[a-zA-Z0-9]+\.[a-zA-Z0-9]{1,10}(\.[a-zA-Z0-9]{1,5})?$/
 
 class Form extends React.Component {
   constructor() {
@@ -67,7 +68,7 @@ class Form extends React.Component {
     }else{
       event.target.className = 'invalid'
     }
-    // console.log(event.target)
+    console.log(event.target)
   }
   validAddress =(event)=>{
     if (patternAddress.test(event.target.value)){
@@ -75,6 +76,7 @@ class Form extends React.Component {
     }else{
       event.target.className = 'invalid'
     }
+    console.log(event.target)
   }
   validPostal =(event)=>{
     if (patternPostal.test(event.target.value)){
@@ -268,7 +270,7 @@ class Form extends React.Component {
             placeholder="janeorjoe@example.com"
             value={this.state.userContactEmail}
             onChange={this.handleChange}
-            onBlue={this.validEmail}
+            onBlur={this.validEmail}
             />
         </label>
 
@@ -279,7 +281,7 @@ class Form extends React.Component {
             placeholder="Should be the same as the above"
             value={this.state.userContactConfirmEmail}
             onChange={this.handleChange}
-            onBlue={this.validEmail}
+            onBlur={this.validEmail}
           />
         </label>
 
