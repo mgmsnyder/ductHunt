@@ -12,6 +12,9 @@ div {
   display:flex;
   flex-direction: column;
 }
+.invalid{
+  border:2px solid red;
+}
 .sectionLabel {
 font-size: 1.5em;
 margin-top: 0.4em;

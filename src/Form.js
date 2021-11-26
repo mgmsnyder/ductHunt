@@ -116,6 +116,16 @@ class Form extends React.Component {
   }
 
   formSubmit = () => {
+    const invalidEntries = document.getElementsByClassName("invalid").length;
+    const requiredEntries = document.querySelectorAll("[required]");
+    let filledRequirements = true;
+    for (let i=0;i<4;i++){
+      if (!requiredEntries[i].value){
+        filledRequirements=false;
+        break;
+      }
+    }
+    if (invalidEntries===0 && filledRequirements){
     const dataState = Object.entries(this.state);
     const dataUser = {};
     for (let i = 0; i < 17; i++) {
@@ -127,9 +137,13 @@ class Form extends React.Component {
     }
     localStorage.dataUser = JSON.stringify(dataUser);
     localStorage.dataCall = JSON.stringify(dataCall);
-    console.log(localStorage.dataUser);
-    console.log(localStorage.dataCall);
-  };
+    // For making a json to automate with
+    // console.log(localStorage.dataUser);
+    // console.log(localStorage.dataCall);
+  }else{
+    console.log("Try again")
+  }
+};
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     type === 'checkbox'
