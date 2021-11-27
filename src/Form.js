@@ -1,12 +1,12 @@
 import React from 'react';
 // import FormSection from "./FormSection";
 
-const patternName = /^\S+$/
+const patternName = /^(\S+)?$/
 // const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
-const patternAddress = /^[a-zA-Z0-9\-.]+(\s[a-zA-Z0-9\-.]+)+$/
-const patternPostal = /^[a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d$/
-const patternPhone = /(1-?)?\(?\d{3}(\)|-)?\d{3}-?\d{4}/
-const patternEmail = /^[a-zA-Z0-9]+([a-zA-Z0-9.]+)*@[a-zA-Z0-9]+\.[a-zA-Z0-9]{1,10}(\.[a-zA-Z0-9]{1,5})?$/
+const patternAddress = /^([a-zA-Z0-9\-.]+(\s[a-zA-Z0-9\-.]+)+)?$/
+const patternPostal = /^([a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d)?$/
+const patternPhone = /^((1-?)?\(?\d{3}(\)|-)?\d{3}-?\d{4})?$/
+const patternEmail = /^([a-zA-Z0-9]+([a-zA-Z0-9.]+)*@[a-zA-Z0-9]+\.[a-zA-Z0-9]{1,10}(\.[a-zA-Z0-9]{1,5})?)?$/
 
 class Form extends React.Component {
   constructor() {
@@ -118,14 +118,14 @@ class Form extends React.Component {
   formSubmit = () => {
     const invalidEntries = document.getElementsByClassName("invalid").length;
     const requiredEntries = document.querySelectorAll("[required]");
-    let filledRequirements = true;
+    let filledRequired = true;
     for (let i=0;i<4;i++){
       if (!requiredEntries[i].value){
         filledRequirements=false;
         break;
       }
     }
-    if (invalidEntries===0 && filledRequirements){
+    if (invalidEntries===0 && filledRequired){
     const dataState = Object.entries(this.state);
     const dataUser = {};
     for (let i = 0; i < 17; i++) {
