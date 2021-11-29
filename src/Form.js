@@ -17,7 +17,7 @@ class Form extends React.Component {
       userLastName: '',
       userAddressLine1: '',
       userAddressLine2: '',
-      userAddressCountry: '',
+      userAddressCountry: 'Canada',
       userAddressCityMunicipality: '',
       userAddressProvinceTerritory: '',
       userAddressCode: '',
@@ -231,7 +231,8 @@ class Form extends React.Component {
             name="userAddressCountry"
             placeholder="Last Name"
             value={this.state.userAddressCountry}
-            onChange={this.handleChange}
+            // onChange={this.handleChange}
+            required
           />
         </label>
 
@@ -242,6 +243,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressCityMunicipality}
             onChange={this.handleChange}
+            required
           />
         </label>
 
@@ -252,6 +254,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressProvinceTerritory}
             onChange={this.handleChange}
+            required
           />
         </label>
 
@@ -263,6 +266,7 @@ class Form extends React.Component {
             value={this.state.userAddressCode}
             onChange={this.handleChange}
             onBlur={this.validPostal}
+            required
           />
         </label>
         <div className="headerSmall">How to contact you</div>
