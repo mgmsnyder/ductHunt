@@ -1,6 +1,13 @@
 import React from 'react';
 // import FormSection from "./FormSection";
 
+const patternName = /^(\S+)?$/
+// const patternAddress = /^[[:alnum:]\-.]+(\s[[:alnum:]\-.]+)+$/
+const patternAddress = /^([a-zA-Z0-9\-.]+(\s[a-zA-Z0-9\-.]+)+)?$/
+const patternPostal = /^([a-zA-Z]\d[a-zA-Z]\h?\d[a-zA-Z]\d)?$/
+const patternPhone = /^((1-?)?\(?\d{3}(\)|-)?\d{3}-?\d{4})?$/
+const patternEmail = /^([a-zA-Z0-9]+([a-zA-Z0-9.]+)*@[a-zA-Z0-9]+\.[a-zA-Z0-9]{1,10}(\.[a-zA-Z0-9]{1,5})?)?$/
+
 class Form extends React.Component {
   constructor() {
     super();
@@ -10,7 +17,7 @@ class Form extends React.Component {
       userLastName: '',
       userAddressLine1: '',
       userAddressLine2: '',
-      userAddressCountry: '',
+      userAddressCountry: 'Canada',
       userAddressCityMunicipality: '',
       userAddressProvinceTerritory: '',
       userAddressCode: '',
@@ -55,6 +62,44 @@ class Form extends React.Component {
     };
   }
 
+  validName =(event)=>{
+    if (patternName.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+    console.log(event.target)
+  }
+  validAddress =(event)=>{
+    if (patternAddress.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+    console.log(event.target)
+  }
+  validPostal =(event)=>{
+    if (patternPostal.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+  }
+  validPhone =(event)=>{
+    if (patternPhone.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+  }
+  validEmail =(event)=>{
+    if (patternEmail.test(event.target.value)){
+      event.target.className = 'valid'
+    }else{
+      event.target.className = 'invalid'
+    }
+  }
+  
   componentDidMount() {
     if (localStorage.dataUser !== undefined) {
       const storageUser = JSON.parse(localStorage.dataUser);
@@ -71,6 +116,16 @@ class Form extends React.Component {
   }
 
   formSubmit = () => {
+    const invalidEntries = document.getElementsByClassName("invalid").length;
+    const requiredEntries = document.querySelectorAll("[required]");
+    let filledRequired = true;
+    for (let i=0;i<4;i++){
+      if (!requiredEntries[i].value){
+        filledRequirements=false;
+        break;
+      }
+    }
+    if (invalidEntries===0 && filledRequired){
     const dataState = Object.entries(this.state);
     const dataUser = {};
     for (let i = 0; i < 17; i++) {
@@ -82,9 +137,13 @@ class Form extends React.Component {
     }
     localStorage.dataUser = JSON.stringify(dataUser);
     localStorage.dataCall = JSON.stringify(dataCall);
-    console.log(localStorage.dataUser);
-    console.log(localStorage.dataCall);
-  };
+    // For making a json to automate with
+    // console.log(localStorage.dataUser);
+    // console.log(localStorage.dataCall);
+  }else{
+    console.log("Try again")
+  }
+};
   handleChange = (event) => {
     const { name, value, checked, type } = event.target;
     type === 'checkbox'
@@ -127,7 +186,9 @@ class Form extends React.Component {
             placeholder="First Name"
             value={this.state.userFirstName}
             onChange={this.handleChange}
-          />
+            required
+            onBlur={this.validName}
+            />
         </label>
         <label>
           Last Name:
@@ -136,6 +197,8 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userLastName}
             onChange={this.handleChange}
+            required
+            onBlur={this.validName}
           />
         </label>
 
@@ -143,9 +206,11 @@ class Form extends React.Component {
           Address line 1:
           <input
             name="userAddressLine1"
-            placeholder="Last Name"
+            placeholder="123 Queen St"
             value={this.state.userAddressLine1}
             onChange={this.handleChange}
+            required
+            onBlur={this.validAddress}
           />
         </label>
 
@@ -156,6 +221,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressLine2}
             onChange={this.handleChange}
+            onBlur={this.validAddress}
           />
         </label>
 
@@ -165,7 +231,8 @@ class Form extends React.Component {
             name="userAddressCountry"
             placeholder="Last Name"
             value={this.state.userAddressCountry}
-            onChange={this.handleChange}
+            // onChange={this.handleChange}
+            required
           />
         </label>
 
@@ -176,6 +243,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressCityMunicipality}
             onChange={this.handleChange}
+            required
           />
         </label>
 
@@ -186,6 +254,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressProvinceTerritory}
             onChange={this.handleChange}
+            required
           />
         </label>
 
@@ -196,6 +265,8 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userAddressCode}
             onChange={this.handleChange}
+            onBlur={this.validPostal}
+            required
           />
         </label>
         <div className="headerSmall">How to contact you</div>
@@ -206,6 +277,7 @@ class Form extends React.Component {
             placeholder="Last Name"
             value={this.state.userContactNumber}
             onChange={this.handleChange}
+            onBlur={this.validPhone}
           />
         </label>
 
@@ -216,7 +288,8 @@ class Form extends React.Component {
             placeholder="janeorjoe@example.com"
             value={this.state.userContactEmail}
             onChange={this.handleChange}
-          />
+            onBlur={this.validEmail}
+            />
         </label>
 
         <label>
@@ -226,6 +299,7 @@ class Form extends React.Component {
             placeholder="Should be the same as the above"
             value={this.state.userContactConfirmEmail}
             onChange={this.handleChange}
+            onBlur={this.validEmail}
           />
         </label>
 
@@ -253,6 +327,8 @@ class Form extends React.Component {
             placeholder="819-555-1234"
             value={this.state.userSpammedNumber}
             onChange={this.handleChange}
+            required
+            onBlur={this.validPhone}
           />
         </label>
 
