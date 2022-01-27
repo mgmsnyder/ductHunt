@@ -71,6 +71,15 @@ const submitFifthPageXpath = '//*[@id="complaint-5"]/div[20]/button[2]';
     if (dataCall.callOnPickup==="live"){
       await driver.findElement(By.id('radio-phone-live')).click();
     }
+    else if (dataCall.callOnPickup==="recording"){
+      await driver.findElement(By.id('radio-phone-rec')).click();
+    }
+    else if (dataCall.callOnPickup==="hold"){
+      await driver.findElement(By.id('radio-phone-rec-hold-for-live')).click();
+    }
+    else if (dataCall.callOnPickup==="vacant"){
+      await driver.findElement(By.id('radio-nobody-online')).click();
+    }
     if (dataCall.callNameOrNumber==="number"){
       await driver.findElement(By.id('radio-comp-phone')).click();
     }
