@@ -118,10 +118,11 @@ class Form extends React.Component {
   formSubmit = () => {
     const invalidEntries = document.getElementsByClassName("invalid").length;
     const requiredEntries = document.querySelectorAll("[required]");
+    
     let filledRequired = true;
     for (let i=0;i<4;i++){
       if (!requiredEntries[i].value){
-        filledRequirements=false;
+        filledRequired=false;
         break;
       }
     }
@@ -138,8 +139,8 @@ class Form extends React.Component {
     localStorage.dataUser = JSON.stringify(dataUser);
     localStorage.dataCall = JSON.stringify(dataCall);
     // For making a json to automate with
-    // console.log(localStorage.dataUser);
-    // console.log(localStorage.dataCall);
+    console.log(localStorage.dataUser);
+    console.log(localStorage.dataCall);
   }else{
     console.log("Try again")
   }
@@ -229,10 +230,10 @@ class Form extends React.Component {
           Country:
           <input
             name="userAddressCountry"
-            placeholder="Last Name"
+            placeholder="Canada"
             value={this.state.userAddressCountry}
             // onChange={this.handleChange}
-            required
+            readOnly
           />
         </label>
 
@@ -240,7 +241,7 @@ class Form extends React.Component {
           City / Municipality:
           <input
             name="userAddressCityMunicipality"
-            placeholder="Last Name"
+            placeholder="Toronto"
             value={this.state.userAddressCityMunicipality}
             onChange={this.handleChange}
             required
@@ -762,8 +763,8 @@ class Form extends React.Component {
         <label>
           <input
             type="checkbox"
-            name="businessInquiry"
-            checked={this.state.businessInquiry}
+            name="ceaseNow"
+            checked={this.state.ceaseNow}
             onChange={this.handleChange}
           />
           During this call
@@ -772,8 +773,8 @@ class Form extends React.Component {
         <label>
           <input
             type="checkbox"
-            name="businessContract"
-            checked={this.state.businessContract}
+            name="ceasePrior"
+            checked={this.state.ceasePrior}
             onChange={this.handleChange}
           />
           Made a previous request more than 14 days ago
@@ -782,8 +783,8 @@ class Form extends React.Component {
         <label>
           <input
             type="checkbox"
-            name="businessDivulge"
-            checked={this.state.businessDivulge}
+            name="ceaseRefuse"
+            checked={this.state.ceaseRefuse}
             onChange={this.handleChange}
           />
           They refused to place you on an internal Do Not Call list
